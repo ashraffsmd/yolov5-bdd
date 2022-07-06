@@ -1,0 +1,7 @@
+path: ../datasets/bdd100k
+train: images/train
+val: images/val
+test: images/test
+
+nc: 10
+names: ['pedestrian', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle', 'bicycle', 'traffic light', 'traffic sign']
