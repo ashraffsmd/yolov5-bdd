@@ -784,8 +784,8 @@ class BDD:
                 filename = filename.split(".")[0]
 
                 size = {
-                    "width": 720,
-                    "height": 1280,
+                    "width": 1280,
+                    "height": 720,
                     "depth": "3"
                 }
 
@@ -798,10 +798,10 @@ class BDD:
                 for label in json_obj["labels"]:
 
                     bndbox = {
-                        "xmin": float(label["box2d"]["x1"]),
-                        "ymin": float(label["box2d"]["y1"]),
-                        "xmax": float(label["box2d"]["x2"]),
-                        "ymax": float(label["box2d"]["y2"])
+                        "xmin": label["box2d"]["x1"],
+                        "ymin": label["box2d"]["y1"],
+                        "xmax": label["box2d"]["x2"],
+                        "ymax": label["box2d"]["y2"]
                     }
 
                     cls = label["category"]
