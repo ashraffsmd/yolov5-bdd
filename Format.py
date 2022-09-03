@@ -795,29 +795,36 @@ class BDD:
                 }
 
                 label_counter = 0
-                for label in json_obj["labels"]:
+                if 'labels' in json_obj:
+                    for label in json_obj["labels"]:
 
-                    bndbox = {
-                        "xmin": label["box2d"]["x1"],
-                        "ymin": label["box2d"]["y1"],
-                        "xmax": label["box2d"]["x2"],
-                        "ymax": label["box2d"]["y2"]
-                    }
+                        bndbox = {
+                            "xmin": label["box2d"]["x1"],
+                            "ymin": label["box2d"]["y1"],
+                            "xmax": label["box2d"]["x2"],
+                            "ymax": label["box2d"]["y2"]
+                        }
 
-                    cls = label["category"]
+                        cls = label["category"]
 
-                    obj_info = {
-                        "name": cls,
-                        "bndbox": bndbox
-                    }
+                        obj_info = {
+                            "name": cls,
+                            "bndbox": bndbox
+                        }
 
+                        obj = {
+                            "num_obj": str(label_counter + 1),
+                            str(label_counter): obj_info
+                        }
+
+                        data[filename]["objects"] = {**data[filename]["objects"], **obj}
+
+                        label_counter = label_counter + 1
+                else :
                     obj = {
-                        "num_obj": str(label_counter + 1),
-                        str(label_counter): obj_info
+                        "num_obj": 0
                     }
-
                     data[filename]["objects"] = {**data[filename]["objects"], **obj}
-
                     label_counter = label_counter + 1
                 printProgressBar(progress_cnt + 1, progress_length, prefix='BDD Parsing:'.ljust(15), suffix='Complete', length=40)
                 progress_cnt += 1
